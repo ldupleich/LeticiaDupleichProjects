@@ -1,0 +1,27 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/Mux4Way16.hdl
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel = 00
+ *       b if sel = 01
+ *       c if sel = 10
+ *       d if sel = 11
+ */
+CHIP Mux4Way16 {
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+    
+    PARTS:
+    // To determine which of the four letters to output we have to narrow
+    // down. Since 'a' and 'c' are true when the 0th position of 'sel' is true,
+    // we apply Mux16 and save their value into 'ab' or 'cd' if sel[0] is true.
+    // Similarly, since 'b' and 'd' are true when the 0th position of sel is false,
+    // we save their value into 'ab' or 'cd' if sel[0] is false. With these saved
+    // values we can determine which letter it is by looking at sel[1] with Mux16.
+
+    Mux16(a=a , b=b , sel=sel[0] , out=ab );
+    Mux16(a=c , b=d , sel=sel[0] , out=cd );
+    Mux16(a=ab , b=cd , sel=sel[1] , out=out );
+}

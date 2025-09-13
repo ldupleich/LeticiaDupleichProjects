@@ -1,0 +1,25 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/Mux.hdl
+/** 
+ * Multiplexor:
+ * if (sel = 0) out = a, else out = b
+ */
+CHIP Mux {
+    IN a, b, sel;
+    OUT out;
+
+    PARTS:
+    // Since we want to output 'a' when sel is 0, when we negate a 0 sel, we would
+    // obtain a 1 and thus we can use the And gate - if 'a' exists and nsel is a 1,
+    // then sel = 0 so we output aout. On the other hand, if sel = 1 and 'b' exists,
+    // we want to output bout. Finally, we use an Or gate to determine which 
+    // of the two outputs exists and output that.
+
+    Not(in=sel , out=nsel );
+    And(a=a , b=nsel , out=aout );
+    And(a=b , b=sel , out=bout );
+    Or(a=aout , b=bout , out=out );
+
+}

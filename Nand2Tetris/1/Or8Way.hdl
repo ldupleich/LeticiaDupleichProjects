@@ -1,0 +1,30 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/Or8Way.hdl
+/**
+ * 8-way Or gate: 
+ * out = in[0] Or in[1] Or ... Or in[7]
+ */
+CHIP Or8Way {
+    IN in[8];
+    OUT out;
+
+    PARTS:
+    // To determine if at least one of the bits out of the 8 bits is 1, we
+    // have to compare all of their values. We therefore implement an Or
+    // gate to first check every 2 bits for all 8 bits (so four times). Then 
+    // we compare all of the outputs of those gates. If there exists a 1
+    // in the first set of comparisons, there will exist a 1 in all of the rest
+    // of the comparisons so the final Or gate will output 1.
+
+    Or(a=in[0] , b=in[1] , out=out1 );
+    Or(a=in[2] , b=in[3] , out=out2 );
+    Or(a=in[4] , b=in[5] , out=out3 );
+    Or(a=in[6] , b=in[7] , out=out4 );
+    
+    Or(a=out1 , b=out2 , out=out5 );
+    Or(a=out3 , b=out4 , out=out6 );
+    
+    Or(a=out5 , b=out6 , out=out );
+}

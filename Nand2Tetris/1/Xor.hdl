@@ -1,0 +1,22 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/Xor.hdl
+/**
+ * Exclusive-or gate:
+ * if ((a and Not(b)) or (Not(a) and b)) out = 1, else out = 0
+ */
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // An Xor gate outputs 1 if only one of the inputs is true, and 0 
+    // if either both inputs are 0 or 1. Thus, an Xor gate is a combination
+    // of an Or gate and a Nand gate, which can be combined using the previously,
+    // implemented function And.
+    
+    Or(a=a , b=b , out=orout );
+    Nand(a=a , b=b , out=nandout );
+    And(a=orout , b=nandout , out=out );
+}
