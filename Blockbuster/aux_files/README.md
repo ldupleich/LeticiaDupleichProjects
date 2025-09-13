@@ -1,0 +1,11 @@
+**Directory Description**
+- `merge_datasets_pre`: Combines title.basics.csv (which is in title.basics.zip) and title.ratings.csv (which is in title.ratings.zip) into one dataset, while also filtering out all non-movie entries and all entries released pre 2020. This resulting dataset is saved in datasets/54000_movies_pre.csv
+- `merge_datasets_post`: Combines all latest webscraper checkpoints into one dataset, which is saved as datasets/54000_movies_dataset.csv. This is the dataset we import at the start of eda.ipynb.
+- `webscraper`: A Python algorithm that uses 54000_movies_dataset_pre.csv to scrape additional information from the IMDb website. This scraper saved progress periodically in in datasets/webscraper_checkpoints in case of internet outtages. 
+- `Memet_feature.ipynb`: Exploratory data analysis (EDA) that Memet conducted to initially explore adult vs non-adult movies, number of movies per year, and actor/director analysis. This was was done for the original dataset, so it had to be changed later on. However, it is an indication of the progress that has been made. 
+- `lettie_lightgbm.ipynb`: Testing out the LightGBM model by training and cross validating the titanic dataset. This model will work out as a template for the full LightGBM model that we will be implementing to classify the blockbuster films.
+- `titanic.csv`: The titanic dataset that was used to train the toy LightGBM model in `lettie_lightgbm.ipynb`
+- `unique_functions.py`: Auxiliary Python functions that were used in the Exploratory data analysis (EDA) to determine how many unique values there were per column/feature of the dataset. These functions were helpful when determining what features to encode or remove.
+- `director_actor_encoding.py`: Auxiliary Python functions that were used when preprocessing the directors and actors. We wanted to encode these columns since the feature variability was extremely high for these columns. These functions allow us to give numerical values to each of the actors (rating and gross income).
+- `hyperparamter_investigation.ipynb`: A jupyter notebook made before we started creating the model. It has info about hyperparameter used by LightGBM, but doesn't necessarily showcase them using our data.
+- 
